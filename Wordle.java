@@ -27,14 +27,17 @@ public class Wordle {
     // G for exact match, Y if letter appears anywhere else, _ otherwise.
     public static void computeFeedback(String secret, String guess, char[] resultRow) {
 		for(int i = 0; i < resultRow.length; i++){
-            if(containsChar(secret, guess.charAt(i))){
-                if(secret.charAt(i) == guess.charAt(i)){
-                    resultRow[i] = 'G';
-                } else {
-                     resultRow[i] = 'Y';
-                }
+            if(secret.charAt(i) == guess.charAt(i)){
+                resultRow[i] ='G';  
             } else {
                 resultRow[i] ='_';
+            }
+        }
+        for(int i = 0; i < resultRow.length; i++){
+            if (resultRow[i] != 'G'){
+                if (containsChar(secret, guess.charAt(i))) {
+                resultRow[i] = 'Y';
+            }
             }
         }
     }
@@ -109,10 +112,10 @@ public class Wordle {
             // Loop until you read a valid guess
             while (!valid) {
                 System.out.print("Enter your guess (5-letter word): ");
-                guess = args[0];
+                guess = inp.readString();
                 guess = guess.toUpperCase();
                               
-                if (guess.length() != 5) {
+                if (guess.length() != WORD_LENGTH) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
                     valid = true;
