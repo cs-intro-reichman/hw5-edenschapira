@@ -110,7 +110,8 @@ public class Wordle {
             while (!valid) {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = args[0];
-                
+                guess = guess.toUpperCase();
+                              
                 if (guess.length() != 5) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
@@ -121,6 +122,7 @@ public class Wordle {
             // Store guess and compute feedback
             // ... use storeGuess and computeFeedback
             storeGuess(guess, guesses, attempt);
+            computeFeedback(secret, guess, results[attempt]);
 
             // Print board
             printBoard(guesses, results, attempt);
